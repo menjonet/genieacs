@@ -32,22 +32,6 @@ for ((i = 5; i >= 1; i--)); do
     echo "Melanjutkan dalam $i. Tekan ctrl+c untuk membatalkan"
 done
 
-#MongoDB
-if ! sudo systemctl is-active --quiet mongod; then
-    curl -s \
-${url_install}\
-mongod.sh | \
-sudo bash
-else
-    echo -e "${GREEN}============================================================================${NC}"
-    echo -e "${GREEN}=================== mongodb sudah terinstall sebelumnya. ===================${NC}"
-fi
-sleep 3
-if ! sudo systemctl is-active --quiet mongod; then
-    sudo rm genieacs/install.sh
-    exit 1
-fi
-
 #NodeJS Install
 check_node_version() {
     if command -v node > /dev/null 2>&1; then
@@ -216,8 +200,6 @@ cp presets.bson /root/db
 cp presets.metadata.json /root/db
 cp provisions.bson /root/db
 cp profisions.metadata.json /root/db
-cp users.bson /root/db
-cp users.metadata.json /root/db
 cp tasks.bson /root/db
 cp tasks.metadata.json /root/db
 cp virtualParameters.bson /root/db
